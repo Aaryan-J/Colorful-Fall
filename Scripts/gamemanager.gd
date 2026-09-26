@@ -29,6 +29,7 @@ func _ready() -> void:
 		bgMusicPlayer.stream = bgMusic
 		bgMusicPlayer.autoplay = false
 		bgMusicPlayer.process_mode = ProcessMode.PROCESS_MODE_ALWAYS
+		bgMusicPlayer.volume_db = -15.0
 		bgMusicPlayer.play()
 
 	sfxPlayer = AudioStreamPlayer.new()

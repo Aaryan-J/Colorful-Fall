@@ -135,6 +135,46 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="MainMenu" type="Control" parent="UI" unique_id=1828849432]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopLeft" type="TextureRect" parent="UI/MainMenu" unique_id=1793323154]
+layout_mode = 0
+offset_right = 160.0
+offset_bottom = 90.0
+texture = ExtResource("16_fevyy")
+stretch_mode = 2
+
+[node name="TopRight" type="TextureRect" parent="UI/MainMenu" unique_id=1792642398]
+layout_mode = 0
+offset_left = 160.0
+offset_right = 320.0
+offset_bottom = 90.0
+texture = ExtResource("17_hibaj")
+stretch_mode = 2
+
+[node name="BottomLeft" type="TextureRect" parent="UI/MainMenu" unique_id=833505197]
+layout_mode = 0
+offset_top = 90.0
+offset_right = 160.0
+offset_bottom = 180.0
+texture = ExtResource("18_pdsj5")
+stretch_mode = 2
+
+[node name="BottomRight" type="TextureRect" parent="UI/MainMenu" unique_id=994814584]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 90.0
+offset_right = 320.0
+offset_bottom = 180.0
+texture = ExtResource("19_ee4r6")
+stretch_mode = 2
+
 [node name="DialogueLabel" type="Label" parent="UI" unique_id=1651792314]
 custom_maximum_size = Vector2(60, -1)
 offset_left = 130.0
@@ -146,6 +186,20 @@ theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="CatInteractionButton" type="Button" parent="UI" unique_id=1515059283]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -4.0
+offset_right = 10.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ShopWindow" type="Control" parent="UI" unique_id=649589901]
 layout_mode = 3
@@ -435,67 +489,13 @@ Thanks for playing."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MainMenu" type="Control" parent="UI" unique_id=1828849432]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TopLeft" type="TextureRect" parent="UI/MainMenu" unique_id=1793323154]
-layout_mode = 0
-offset_right = 160.0
-offset_bottom = 90.0
-texture = ExtResource("16_fevyy")
-stretch_mode = 2
-
-[node name="TopRight" type="TextureRect" parent="UI/MainMenu" unique_id=1792642398]
-layout_mode = 0
-offset_left = 160.0
-offset_right = 320.0
-offset_bottom = 90.0
-texture = ExtResource("17_hibaj")
-stretch_mode = 2
-
-[node name="BottomLeft" type="TextureRect" parent="UI/MainMenu" unique_id=833505197]
-layout_mode = 0
-offset_top = 90.0
-offset_right = 160.0
-offset_bottom = 180.0
-texture = ExtResource("18_pdsj5")
-stretch_mode = 2
-
-[node name="BottomRight" type="TextureRect" parent="UI/MainMenu" unique_id=994814584]
-layout_mode = 0
-offset_left = 160.0
-offset_top = 90.0
-offset_right = 320.0
-offset_bottom = 180.0
-texture = ExtResource("19_ee4r6")
-stretch_mode = 2
-
-[node name="CatInteractionButton" type="Button" parent="UI" unique_id=1515059283]
-self_modulate = Color(1, 1, 1, 0)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -10.0
-offset_top = -4.0
-offset_right = 10.0
-offset_bottom = 16.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [connection signal="pressed" from="UI/MapWindow/Forest" to="UI/MapWindow" method="_on_forest_pressed"]
 [connection signal="pressed" from="UI/MapWindow/Pond" to="UI/MapWindow" method="_on_pond_pressed"]
 [connection signal="pressed" from="UI/MapWindow/PumpkinPatch" to="UI/MapWindow" method="_on_pumpkin_patch_pressed"]
 [connection signal="pressed" from="UI/MapWindow/Shop" to="UI/MapWindow" method="_on_shop_pressed"]
+[connection signal="pressed" from="UI/CatInteractionButton" to="UI/MapWindow" method="_on_cat_interaction_button_pressed"]
 [connection signal="pressed" from="UI/ShopWindow/ShopCard/CloseButton" to="UI/ShopWindow" method="_on_close_button_pressed"]
 [connection signal="pressed" from="UI/ShopWindow/ShopCard/ProductivityButton" to="UI/ShopWindow" method="_on_productivity_button_pressed"]
 [connection signal="pressed" from="UI/ShopWindow/ShopCard/StubbornButton" to="UI/ShopWindow" method="_on_stubborn_button_pressed"]
 [connection signal="pressed" from="UI/ShopWindow/ShopCard/CloverButton" to="UI/ShopWindow" method="_on_clover_button_pressed"]
 [connection signal="pressed" from="UI/TypingWindow/BackgroundCard/CloseButton" to="UI/TypingWindow" method="_on_close_button_pressed"]
-[connection signal="pressed" from="UI/CatInteractionButton" to="UI/MapWindow" method="_on_cat_interaction_button_pressed"]

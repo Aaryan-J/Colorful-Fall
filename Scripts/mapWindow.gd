@@ -30,6 +30,8 @@ var dialogueTween: Tween
 @onready var menuBR: TextureRect = $"../MainMenu/BottomRight"
 @onready var menu: Control = $"../MainMenu"
 
+var tutorialState: int = 0
+
 # tracking states
 var regionCompletion = {
 	"forest": {"current": 0, "max": 10, "completed": false, "button": null, "progress": null}, #120
@@ -94,12 +96,28 @@ func checkWinCondition() -> void:
 func _on_cat_interaction_button_pressed() -> void:
 	match GameManager.currentStoryState:
 		0:
-			GameManager.currentStoryState = 1
-			if awakeKittyTexture:
-				catDisplayNode.texture = awakeKittyTexture
-			animateMenuReveal()
-			showTemporaryDialogue("The color is washed out from everything... Let's fix it!", true)
-
+			match tutorialState:
+				0:
+					animateMenuReveal()
+					if awakeKittyTexture:
+						catDisplayNode.texture = awakeKittyTexture
+					showTemporaryDialogue("The color is washed out from everything... (Click me for tutorial)", false)
+					tutorialState += 1
+				1:
+					showTemporaryDialogue("Click a region, type the words to fill the progress bar and earn Catnip!", false)
+					tutorialState += 1
+				2:
+					showTemporaryDialogue("Spend Catnip in the Shop at the bottom right for powerful upgrades!", false)
+					tutorialState += 1
+				3:
+					showTemporaryDialogue("When the progress bar is full, the region will be colorful again!", false)
+					tutorialState += 1
+				4:
+					showTemporaryDialogue(" Let's create a colorful fall!", false)
+					tutorialState += 1
+				5:
+					dialogueLabel.text = ""
+					GameManager.currentStoryState = 1
 		1:
 			showTemporaryDialogue("Keep trying! Let's bring all the color back!", true)
 		2:
