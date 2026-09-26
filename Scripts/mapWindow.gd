@@ -1,6 +1,8 @@
 extends Control
 
 # references
+@onready var typingWindow: Control = $"../TypingWindow"
+
 @onready var forestButton: TextureButton = $Forest
 @onready var pondButton: TextureButton = $Pond
 @onready var pumpkinButton: TextureButton = $PumpkinPatch
@@ -11,18 +13,18 @@ extends Control
 
 # tracking states
 var regionCompletion = {
-	"canopy": {"current": 0, "max": 40, "completed": false, "button": null, "progress": null},
-	"lake": {"current": 0, "max": 60, "completed": false, "button": null, "progress": null},
+	"forest": {"current": 0, "max": 40, "completed": false, "button": null, "progress": null},
+	"pond": {"current": 0, "max": 60, "completed": false, "button": null, "progress": null},
 	"pumpkin": {"current": 0, "max": 100, "completed": false, "button": null, "progress": null}
 }
 
 func _ready() -> void:
 	# link code directory to nodes
-	regionCompletion["canopy"]["button"] = forestButton
-	regionCompletion["canopy"]["progress"] = forestProgress
+	regionCompletion["forest"]["button"] = forestButton
+	regionCompletion["forest"]["progress"] = forestProgress
 
-	regionCompletion["lake"]["button"] = pondButton
-	regionCompletion["lake"]["progress"] = pondProgress
+	regionCompletion["pond"]["button"] = pondButton
+	regionCompletion["pond"]["progress"] = pondProgress
 
 	regionCompletion["pumpkin"]["button"] = pumpkinButton
 	regionCompletion["pumpkin"]["progress"] = pumpkinProgress
@@ -34,7 +36,7 @@ func _ready() -> void:
 		region["progress"].value = 0
 
 # add progression points
-func advance_region_progress(regionName: String, amount: int) -> void:
+func advanceRegionProgress(regionName: String, amount: int) -> void:
 	if not regionCompletion.has(regionName) or regionCompletion[regionName]["completed"]:
 		return
 
@@ -44,10 +46,10 @@ func advance_region_progress(regionName: String, amount: int) -> void:
 
 	# check if region has reached 100% color restoration
 	if region["current"] >= region["max"]:
-		restore_region_color(regionName)
+		restoreRegionColor(regionName)
 
 # restore region color
-func restore_region_color(regionName: String) -> void:
+func restoreRegionColor(regionName: String) -> void:
 	var region = regionCompletion[regionName]
 	region["completed"] = true
 	region["button"].disabled = true # lock the button so they can't click it again
@@ -60,13 +62,26 @@ func restore_region_color(regionName: String) -> void:
 
 
 func _on_forest_pressed() -> void:
-	print_debug("Pressed Forest button")
+	var data = regionCompletion["forest"]
+	if not data["completed"]:
+		typingWindow.visible = true # Temporary toggle until we add sliding
+		typingWindow.openTypingSession("forest", data["current"], data["max"])
 
 func _on_shop_pressed() -> void:
-	print_debug("Pressed Shop button")
+	var shopWindow = get_node_or_null("../ShopWindow")
+	if shopWindow:
+		shopWindow.visible = true
+		if shopWindow.has_method("updateAllShopUI"):
+			shopWindow.updateAllShopUI()
 
 func _on_pumpkin_patch_pressed() -> void:
-	print_debug("Pressed Pumpkin Patch button")
+	var data = regionCompletion["pumpkin"]
+	if not data["completed"]:
+		typingWindow.visible = true
+		typingWindow.openTypingSession("pumpkin", data["current"], data["max"])
 
 func _on_pond_pressed() -> void:
-	print_debug("Pressed Pond button")
+	var data = regionCompletion["pond"]
+	if not data["completed"]:
+		typingWindow.visible = true
+		typingWindow.openTypingSession("pond", data["current"], data["max"])
