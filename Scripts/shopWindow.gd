@@ -7,6 +7,8 @@ extends Control
 @onready var stubbornButton: Button = $ShopCard/StubbornButton
 @onready var cloverButton: Button = $ShopCard/CloverButton
 
+@onready var blur: Panel = $"../MapWindow/Blur"
+
 # price structures
 var productivityPrices = [50, 200, 500]
 var stubbornPrices = [200, 500]
@@ -22,6 +24,7 @@ func _ready() -> void:
 func openShopSession() -> void:
 	updateAllShopUI()
 
+	blur.visible = true
 	var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tween.tween_property(self, "position:y", 0.0, 0.4)
 
@@ -88,5 +91,6 @@ func _on_clover_button_pressed() -> void:
 
 # close button
 func _on_close_button_pressed() -> void:
+	blur.visible = false
 	var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 	tween.tween_property(self, "position:y", -200.0, 0.4)

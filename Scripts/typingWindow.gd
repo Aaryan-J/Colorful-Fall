@@ -3,6 +3,8 @@ extends Control
 @onready var wordLabel: RichTextLabel = $BackgroundCard/WordLabel
 @onready var miniProgress: ProgressBar = $BackgroundCard/ProgressBar
 
+@onready var blur: Panel = $"../MapWindow/Blur"
+
 # states for the current typing test
 var activeRegionName: String = ""
 var currentWord: String = ""
@@ -22,6 +24,8 @@ func openTypingSession(regionName: String, currentProg: int, maxProg: int):
 	miniProgress.value = currentProg
 	set_process_unhandled_input(true)
 	startNewWord()
+
+	blur.visible = true
 
 	# Smoothly slide down into view from y: -200 to y: 0
 	var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
@@ -121,6 +125,8 @@ func completeWord():
 func closeWindow():
 	currentWord = "" # clear typing focus
 	set_process_unhandled_input(false)
+
+	blur.visible = false
 
 	var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 	tween.tween_property(self, "position:y", -200.0, 0.4)
