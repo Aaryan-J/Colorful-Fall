@@ -1,11 +1,136 @@
 [gd_scene format=3 uid="uid://4qie4g6ryedd"]
 
 [ext_resource type="Texture2D" uid="uid://da1jfha46274b" path="res://Assets/BG/bg.png" id="1_jjgbg"]
+[ext_resource type="Script" uid="uid://dbra4xg2676bk" path="res://Scenes/mapWindow.gd" id="2_6bp64"]
+[ext_resource type="Texture2D" uid="uid://d3jqjohgwaeph" path="res://Assets/Regions/Forest.png" id="2_21xkr"]
+[ext_resource type="Texture2D" uid="uid://du07d7qbwdfro" path="res://Assets/Regions/pond.png" id="3_6bp64"]
+[ext_resource type="Texture2D" uid="uid://bflp10pbp4471" path="res://Assets/Regions/pumpkin.png" id="4_344ge"]
+[ext_resource type="Texture2D" uid="uid://2hg2oqrcqqmm" path="res://Assets/Regions/shop.png" id="5_ynf5e"]
+[ext_resource type="Texture2D" uid="uid://brtan3m7erefw" path="res://Assets/sleepyKitty.png" id="6_hptm8"]
 
 [node name="Node2D" type="Control" unique_id=2061939042]
 layout_mode = 3
 anchors_preset = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=487192774]
+texture_filter = 1
 position = Vector2(160, 90)
 texture = ExtResource("1_jjgbg")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=490780815]
+
+[node name="MapWindow" type="Control" parent="UI" unique_id=827917528]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_6bp64")
+
+[node name="Forest" type="TextureButton" parent="UI/MapWindow" unique_id=681716132]
+self_modulate = Color(0.4392157, 0.47843137, 0.5411765, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 128.0
+offset_bottom = 80.0
+texture_normal = ExtResource("2_21xkr")
+
+[node name="ProgressBar" type="TextureProgressBar" parent="UI/MapWindow/Forest" unique_id=769758253]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 96.0
+offset_bottom = 8.0
+
+[node name="Pond" type="TextureButton" parent="UI/MapWindow" unique_id=360938577]
+self_modulate = Color(0.4392157, 0.47843137, 0.5411765, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 192.0
+offset_top = 16.0
+offset_right = 304.0
+offset_bottom = 80.0
+texture_normal = ExtResource("3_6bp64")
+
+[node name="ProgressBar" type="TextureProgressBar" parent="UI/MapWindow/Pond" unique_id=926759798]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 96.0
+offset_bottom = 8.0
+
+[node name="PumpkinPatch" type="TextureButton" parent="UI/MapWindow" unique_id=1147793649]
+self_modulate = Color(0.4392157, 0.47843137, 0.5411765, 1)
+texture_filter = 1
+layout_mode = 0
+offset_left = 16.0
+offset_top = 112.0
+offset_right = 128.0
+offset_bottom = 176.0
+texture_normal = ExtResource("4_344ge")
+
+[node name="ProgressBar" type="TextureProgressBar" parent="UI/MapWindow/PumpkinPatch" unique_id=1102948288]
+layout_mode = 0
+offset_left = 16.0
+offset_right = 96.0
+offset_bottom = 8.0
+
+[node name="SleepingCat" type="TextureRect" parent="UI/MapWindow" unique_id=1528412915]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -3.0
+offset_right = 8.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_hptm8")
+stretch_mode = 2
+
+[node name="Shop" type="TextureButton" parent="UI/MapWindow" unique_id=474102114]
+texture_filter = 1
+layout_mode = 0
+offset_left = 192.0
+offset_top = 112.0
+offset_right = 304.0
+offset_bottom = 176.0
+texture_normal = ExtResource("5_ynf5e")
+
+[node name="ShopWindow" type="Control" parent="UI" unique_id=649589901]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -45.0
+offset_right = 80.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TypingWindow" type="Control" parent="UI" unique_id=1423576329]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -45.0
+offset_right = 80.0
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="UI/MapWindow/Forest" to="UI/MapWindow" method="_on_forest_pressed"]
+[connection signal="pressed" from="UI/MapWindow/Pond" to="UI/MapWindow" method="_on_pond_pressed"]
+[connection signal="pressed" from="UI/MapWindow/PumpkinPatch" to="UI/MapWindow" method="_on_pumpkin_patch_pressed"]
+[connection signal="pressed" from="UI/MapWindow/Shop" to="UI/MapWindow" method="_on_shop_pressed"]
