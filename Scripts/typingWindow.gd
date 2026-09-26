@@ -5,6 +5,8 @@ extends Control
 
 @onready var blur: Panel = $"../MapWindow/Blur"
 
+@onready var catnipIndicator: Label = $BackgroundCard/CatnipIndicator
+
 # states for the current typing test
 var activeRegionName: String = ""
 var currentWord: String = ""
@@ -94,8 +96,19 @@ func updateWordDisplay():
 	wordLabel.text = "[center][color=white]" + correctPart + "[/color][color=gray]" + remainingPart + "[/color][/center]"
 
 func completeWord():
-	# calculate productivity modifier scale: 2 -> 4 -> 8 -> 16
+	# catnip indicator
+	catnipIndicator.text = "+10"
+
+	catnipIndicator.position.y = -20
+	catnipIndicator.modulate.a = 1.0
+
+	var indicator_tween = create_tween().set_parallel(true).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	indicator_tween.tween_property(catnipIndicator, "position:y", catnipIndicator.position.y - 15, 0.6)
+	indicator_tween.tween_property(catnipIndicator, "modulate:a", 0.0, 0.6)
+
 	GameManager.playSFX(GameManager.correctWordSound)
+
+	# calculate productivity modifier scale: 2 -> 4 -> 8 -> 16
 	var productivityLevel = 0
 	if GameManager.has_meta("productivityLevel"):
 		productivityLevel = GameManager.get_meta("productivityLevel")

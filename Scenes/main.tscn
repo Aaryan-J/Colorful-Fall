@@ -419,6 +419,30 @@ offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="CatnipIndicator" type="Label" parent="UI/TypingWindow/BackgroundCard" unique_id=1328217463]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 60.0
+offset_top = -20.0
+offset_right = 100.0
+offset_bottom = -3.0
+text = "+10 "
+vertical_alignment = 1
+
+[node name="catnip" type="TextureRect" parent="UI/TypingWindow/BackgroundCard/CatnipIndicator" unique_id=1278644043]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 2.0
+offset_right = -10.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_fdnlq")
+stretch_mode = 2
+
 [node name="PopUpWindow" type="Control" parent="UI" unique_id=418937936]
 layout_mode = 3
 anchors_preset = 15
