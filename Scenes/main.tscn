@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dbra4xg2676bk" path="res://Scripts/mapWindow.gd" id="2_6bp64"]
 [ext_resource type="Texture2D" uid="uid://d3jqjohgwaeph" path="res://Assets/Regions/Forest.png" id="2_21xkr"]
 [ext_resource type="Texture2D" uid="uid://du07d7qbwdfro" path="res://Assets/Regions/pond.png" id="3_6bp64"]
+[ext_resource type="Texture2D" uid="uid://bs81iqrjxuwbv" path="res://Assets/kitty.png" id="3_wsu2k"]
 [ext_resource type="Texture2D" uid="uid://bflp10pbp4471" path="res://Assets/Regions/pumpkin.png" id="4_344ge"]
 [ext_resource type="Texture2D" uid="uid://2hg2oqrcqqmm" path="res://Assets/Regions/shop.png" id="5_ynf5e"]
 [ext_resource type="Texture2D" uid="uid://brtan3m7erefw" path="res://Assets/sleepyKitty.png" id="6_hptm8"]
@@ -13,6 +14,7 @@
 [ext_resource type="Script" uid="uid://cdif46yu88td7" path="res://Scripts/typingWindow.gd" id="8_hptm8"]
 [ext_resource type="Texture2D" uid="uid://bi6inmoyvogck" path="res://Assets/closeButton.png" id="10_d1ilt"]
 [ext_resource type="Texture2D" uid="uid://lf7x2vliylj4" path="res://Assets/catnip.png" id="10_fdnlq"]
+[ext_resource type="Script" uid="uid://dyj0resjynl07" path="res://Scripts/popupWindow.gd" id="14_jkdf5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sbo6d"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -36,6 +38,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_6bp64")
+awakeKittyTexture = ExtResource("3_wsu2k")
+sleepingKittyTexture = ExtResource("6_hptm8")
 
 [node name="Forest" type="TextureButton" parent="UI/MapWindow" unique_id=681716132]
 self_modulate = Color(0.4392157, 0.47843137, 0.5411765, 1)
@@ -108,6 +112,15 @@ grow_vertical = 2
 texture = ExtResource("6_hptm8")
 stretch_mode = 2
 
+[node name="CatInteractionButton" type="Button" parent="UI/MapWindow/SleepingCat" unique_id=1515059283]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Shop" type="TextureButton" parent="UI/MapWindow" unique_id=474102114]
 texture_filter = 1
 layout_mode = 0
@@ -117,17 +130,8 @@ offset_right = 304.0
 offset_bottom = 176.0
 texture_normal = ExtResource("5_ynf5e")
 
-[node name="ShopWindow" type="Control" parent="UI" unique_id=649589901]
+[node name="Blur" type="Panel" parent="UI/MapWindow" unique_id=628572620]
 visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("8_fdnlq")
-
-[node name="Blur" type="Panel" parent="UI/ShopWindow" unique_id=83500658]
 modulate = Color(0.37413925, 0.37413928, 0.37413922, 1)
 layout_mode = 1
 anchors_preset = 15
@@ -135,6 +139,29 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="DialogueLabel" type="Label" parent="UI" unique_id=1651792314]
+custom_maximum_size = Vector2(60, -1)
+offset_left = 130.0
+offset_top = 105.0
+offset_right = 190.0
+offset_bottom = 122.0
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 8
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ShopWindow" type="Control" parent="UI" unique_id=649589901]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+offset_bottom = -200.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_fdnlq")
 
 [node name="ShopCard" type="TextureRect" parent="UI/ShopWindow" unique_id=622645036]
 texture_filter = 1
@@ -272,23 +299,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TypingWindow" type="Control" parent="UI" unique_id=1423576329]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -200.0
+offset_bottom = -200.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("8_hptm8")
-
-[node name="Blur" type="Panel" parent="UI/TypingWindow" unique_id=628572620]
-modulate = Color(0.37413925, 0.37413928, 0.37413922, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="BackgroundCard" type="TextureRect" parent="UI/TypingWindow" unique_id=760446529]
 texture_filter = 1
@@ -351,9 +370,78 @@ offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="PopUpWindow" type="Control" parent="UI" unique_id=418937936]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("14_jkdf5")
+
+[node name="CelebrationLabel" type="Label" parent="UI/PopUpWindow" unique_id=995296948]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -8.5
+offset_right = 20.0
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+text = "Hello"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EndWindow" type="Control" parent="UI" unique_id=914318630]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FadeOverlay" type="ColorRect" parent="UI/EndWindow" unique_id=701400229]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="EndLabel" type="Label" parent="UI/EndWindow" unique_id=1262921202]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -8.5
+offset_right = 20.0
+offset_bottom = 8.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "The autumn world is warm and colorful again
+
+Sleep tight little cat."
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="UI/MapWindow/Forest" to="UI/MapWindow" method="_on_forest_pressed"]
 [connection signal="pressed" from="UI/MapWindow/Pond" to="UI/MapWindow" method="_on_pond_pressed"]
 [connection signal="pressed" from="UI/MapWindow/PumpkinPatch" to="UI/MapWindow" method="_on_pumpkin_patch_pressed"]
+[connection signal="pressed" from="UI/MapWindow/SleepingCat/CatInteractionButton" to="UI/MapWindow" method="_on_cat_interaction_button_pressed"]
 [connection signal="pressed" from="UI/MapWindow/Shop" to="UI/MapWindow" method="_on_shop_pressed"]
 [connection signal="pressed" from="UI/ShopWindow/ShopCard/CloseButton" to="UI/ShopWindow" method="_on_close_button_pressed"]
 [connection signal="pressed" from="UI/ShopWindow/ShopCard/ProductivityButton" to="UI/ShopWindow" method="_on_productivity_button_pressed"]

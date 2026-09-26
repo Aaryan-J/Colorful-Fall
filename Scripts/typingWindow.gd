@@ -18,12 +18,14 @@ var wordPools = {
 
 func openTypingSession(regionName: String, currentProg: int, maxProg: int):
 	activeRegionName = regionName
-
-	# update progress bar to match the region's current health
 	miniProgress.max_value = maxProg
 	miniProgress.value = currentProg
-
+	set_process_unhandled_input(true)
 	startNewWord()
+
+	# Smoothly slide down into view from y: -200 to y: 0
+	var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "position:y", 0.0, 0.4)
 
 func startNewWord():
 	if not wordPools.has(activeRegionName):
@@ -36,6 +38,9 @@ func startNewWord():
 	updateWordDisplay()
 
 func _unhandled_input(event: InputEvent) -> void:
+	if not event is InputEventKey:
+		return
+
 	if not visible or not event.pressed or currentWord == "":
 		return
 
@@ -111,7 +116,10 @@ func completeWord():
 
 func closeWindow():
 	currentWord = "" # clear typing focus
-	visible = false
+	set_process_unhandled_input(false)
+
+	var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	tween.tween_property(self, "position:y", -200.0, 0.4)
 
 
 func _on_close_button_pressed() -> void:

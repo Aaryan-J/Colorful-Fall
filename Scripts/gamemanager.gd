@@ -1,5 +1,7 @@
 extends Node
 
+var currentStoryState: int = 0 # 0 = sleeping, 1 = awake, 2 = ending
+
 var catnipBalance: int = 0
 
 # upgrade Levels (0 = Base level)
@@ -24,6 +26,6 @@ func _ready() -> void:
 
 func _onCloverTick() -> void:
 	if fourLeavedCloverLevel == 1:
-		addCatnip(2)
+		addCatnip(1)
 	elif fourLeavedCloverLevel == 2:
-		addCatnip(5)
+		addCatnip(3)

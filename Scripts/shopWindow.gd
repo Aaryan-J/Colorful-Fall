@@ -10,7 +10,7 @@ extends Control
 # price structures
 var productivityPrices = [50, 200, 500]
 var stubbornPrices = [200, 500]
-var cloverPrices = [100, 250]
+var cloverPrices = [250, 500]
 
 func _ready() -> void:
 	# connect to gamemanager
@@ -18,6 +18,12 @@ func _ready() -> void:
 		GameManager.catnipChanged.connect(onCatnipUpdated)
 
 	updateAllShopUI()
+
+func openShopSession() -> void:
+	updateAllShopUI()
+
+	var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "position:y", 0.0, 0.4)
 
 # updates all shop UI elements to reflect the current state
 func updateAllShopUI() -> void:
@@ -82,5 +88,5 @@ func _on_clover_button_pressed() -> void:
 
 # close button
 func _on_close_button_pressed() -> void:
-	# will hook up the sliding animation here in wiring step
-	visible = false
+	var tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
+	tween.tween_property(self, "position:y", -200.0, 0.4)
