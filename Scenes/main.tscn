@@ -1,3 +1,11 @@
 [gd_scene format=3 uid="uid://4qie4g6ryedd"]
 
-[node name="Node2D" type="Node2D" unique_id=560843287]
+[ext_resource type="Texture2D" uid="uid://da1jfha46274b" path="res://Assets/BG/bg.png" id="1_jjgbg"]
+
+[node name="Node2D" type="Control" unique_id=2061939042]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=487192774]
+position = Vector2(160, 90)
+texture = ExtResource("1_jjgbg")
