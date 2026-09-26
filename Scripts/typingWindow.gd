@@ -55,12 +55,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		currentCharIdx += 1
 		updateWordDisplay()
 
+		GameManager.playSFX(GameManager.typeSound)
+
 		# if the whole string is fully typed then complete the word
 		if currentCharIdx >= currentWord.length():
 			completeWord()
 	else:
 		# --- TYPO HANDLING ---
 		mistakesMade += 1
+		GameManager.playSFX(GameManager.wrongLetterSound)
 
 		# pull current upgrade values from the central game controller
 		var stubbornKittyLevel = 0
@@ -88,6 +91,7 @@ func updateWordDisplay():
 
 func completeWord():
 	# calculate productivity modifier scale: 2 -> 4 -> 8 -> 16
+	GameManager.playSFX(GameManager.correctWordSound)
 	var productivityLevel = 0
 	if GameManager.has_meta("productivityLevel"):
 		productivityLevel = GameManager.get_meta("productivityLevel")

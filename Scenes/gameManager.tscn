@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://br0k72ssktgvn"]
+
+[ext_resource type="Script" uid="uid://bex3qpdhpqrrs" path="res://Scripts/gamemanager.gd" id="1_sfebq"]
+[ext_resource type="AudioStream" uid="uid://bdf1f51xrcbdf" path="res://Assets/Audio/lofiAutumn.ogg" id="2_2crpj"]
+[ext_resource type="AudioStream" uid="uid://be8kojl6svobi" path="res://Assets/Audio/click.ogg" id="3_p60qp"]
+[ext_resource type="AudioStream" uid="uid://bxja7p2epild3" path="res://Assets/Audio/wrongWord.ogg" id="4_41of3"]
+[ext_resource type="AudioStream" uid="uid://k7ces1n3p5lu" path="res://Assets/Audio/correctWord.ogg" id="5_x655i"]
+
+[node name="GameManager" type="Node" unique_id=33705311]
+script = ExtResource("1_sfebq")
+bgMusic = ExtResource("2_2crpj")
+typeSound = ExtResource("3_p60qp")
+wrongLetterSound = ExtResource("4_41of3")
+correctWordSound = ExtResource("5_x655i")

@@ -30,7 +30,6 @@ var dialogueTween: Tween
 @onready var menuBR: TextureRect = $"../MainMenu/BottomRight"
 @onready var menu: Control = $"../MainMenu"
 
-
 # tracking states
 var regionCompletion = {
 	"forest": {"current": 0, "max": 10, "completed": false, "button": null, "progress": null}, #120
