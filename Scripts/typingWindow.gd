@@ -15,10 +15,32 @@ var mistakesMade: int = 0
 
 # word arrays for each regions
 var wordPools = {
-	"forest": ["maple", "acorn", "leaves", "branches", "russet", "mulch", "mossy", "forest"],
-	"pond": ["ripple", "pebble", "reflection", "breeze", "mist", "drizzle", "pond", "glassy"],
-	"pumpkin": ["pumpkin", "harvest", "gourd", "squash", "scarecrow", "hayride", "marrow"]
+	"forest": [
+		"moss", "bark", "twig", "leaf", "fern", "root", "wood", "deer", "owl", "bear",
+		"acorn", "maple", "cedar", "birch", "grove", "canopy", "timber", "forage", "rustle", "canopy",
+		"thicket", "bramble", "sprout", "foliage", "woodland", "sapling", "mulch", "mossy", "forest", "fungi",
+		"russet", "amber", "copper", "chestnut", "hazel", "walnut", "evergreen", "spruce", "willow", "poplar",
+		"undergrowth", "wilderness", "mushrooms", "woodpecker", "squirrel", "chipmunk", "hedgehog", "badger", "foxglove", "chrysalis",
+		"deciduous", "overstory", "understory", "mycelium", "woodsmoke", "decomposing", "shady", "dense", "overgrown", "untamed"
+	],
+	"pond": [
+		"mist", "fog", "rain", "dew", "pond", "lake", "pier", "dock", "fish", "frog",
+		"ripple", "pebble", "breeze", "drizzle", "glassy", "murky", "chill", "still", "shore", "bank",
+		"cattail", "lilypad", "lotus", "tadpole", "minnow", "dragonfly", "heron", "mallard", "beaver", "otter",
+		"reflection", "shimmer", "glisten", "overcast", "cloudy", "moisture", "vapor", "splash", "current", "stream",
+		"waterfront", "watershed", "trickle", "cascade", "downpour", "shallows", "submerged", "aquatic", "reedy", "marshy",
+		"weathered", "dampness", "condensation", "evaporation", "rainwater", "raindrop", "puddle", "brook", "creek", "wetlands"
+	],
+	"pumpkin": [
+		"hay", "dirt", "seed", "gourd", "vines", "crop", "farm", "plow", "corn", "crow",
+		"pumpkin", "harvest", "squash", "marrow", "hayride", "scarecrow", "wheelbarrow", "tractor", "barnyard", "patch",
+		"cinnamon", "nutmeg", "clove", "ginger", "allspice", "baked", "roasting", "toasted", "autumnal", "equinox",
+		"sweater", "flannel", "cardigan", "blanket", "slippers", "scarf, mitten", "bonfire", "hearth", "fireplace", "cider",
+		"teacup", "steaming", "simmer", "spiced", "festive", "bountiful", "abundance", "solstice", "folklore", "tradition",
+		"orchard", "baskets", "crates", "bushel", "windrow", "cornucopia", "homestead", "wholesome", "crunchy", "plentiful"
+	]
 }
+
 
 func openTypingSession(regionName: String, currentProg: int, maxProg: int):
 	activeRegionName = regionName
@@ -71,12 +93,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		mistakesMade += 1
 		GameManager.playSFX(GameManager.wrongLetterSound)
 
-		# pull current upgrade values from the central game controller
-		var stubbornKittyLevel = 0
-		if GameManager.has_meta("stubbornKittyLevel"):
-			stubbornKittyLevel = GameManager.get_meta("stubbornKittyLevel")
-
-		var maxAllowedMistakes = 1 + stubbornKittyLevel
+		var maxAllowedMistakes = 1 + GameManager.stubbornKittyLevel
 
 		if mistakesMade < maxAllowedMistakes:
 			# Stubborn Kitty Feature: delete last letter, step back 1 index, let them retry

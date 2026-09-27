@@ -34,9 +34,9 @@ var tutorialState: int = 0
 
 # tracking states
 var regionCompletion = {
-	"forest": {"current": 0, "max": 10, "completed": false, "button": null, "progress": null}, #120
-	"pond": {"current": 0, "max": 10, "completed": false, "button": null, "progress": null}, #200
-	"pumpkin": {"current": 0, "max": 10, "completed": false, "button": null, "progress": null} #400
+	"forest": {"current": 0, "max": 120, "completed": false, "button": null, "progress": null},
+	"pond": {"current": 0, "max": 200, "completed": false, "button": null, "progress": null},
+	"pumpkin": {"current": 0, "max": 400, "completed": false, "button": null, "progress": null}
 }
 
 func _ready() -> void:
